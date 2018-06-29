@@ -127,7 +127,7 @@ end
         gem "mail"
         gem "prawn"
         gem "redcarpet"
-        gem 'bcrypt-ruby', '~> 3.0.0'
+        gem 'bcrypt'
         gem 'omniauth-identity'
         gem 'cloudinary'
         gem 'kaminari'

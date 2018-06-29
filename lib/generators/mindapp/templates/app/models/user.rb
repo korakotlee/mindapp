@@ -1,11 +1,21 @@
 class User
   include Mongoid::Document
+  include ActiveModel::SecurePassword
   field :provider, :type => String
   field :uid, :type => String
   field :code, :type => String
+  # field :password, :type => String
+  field :password_digest, :type => String
   field :email, :type => String
   field :role, :type => String
-  belongs_to :identity
+  # belongs_to :identity
+  has_secure_password
+  # field :provider, :type => String
+  # field :uid, :type => String
+  # field :code, :type => String
+  # field :email, :type => String
+  # field :role, :type => String
+  # belongs_to :identity
   has_many :xmains, :class_name => "Mindapp::Xmain"
 
   def has_role(role1)
