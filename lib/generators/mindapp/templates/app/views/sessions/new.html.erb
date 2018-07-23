@@ -1,4 +1,4 @@
-<%= form_tag "/auth/identity/callback", {'data-ajax'=>'false'} do %>
+<%= form_tag "/sessions/create", {'data-ajax'=>'false'} do %>
   <div class="field" data-role="fieldcontain">
     <%= label_tag :auth_key, "User name" %>
     <%= text_field_tag :auth_key %>

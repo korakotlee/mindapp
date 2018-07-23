@@ -1,4 +1,6 @@
 class User
+  # OmniAuth messed up; use simple authentication
+  # https://www.rubypigeon.com/posts/how-to-implement-simple-authentication-without-devise/
   include Mongoid::Document
   include ActiveModel::SecurePassword
   field :provider, :type => String
@@ -10,12 +12,6 @@ class User
   field :role, :type => String
   # belongs_to :identity
   has_secure_password
-  # field :provider, :type => String
-  # field :uid, :type => String
-  # field :code, :type => String
-  # field :email, :type => String
-  # field :role, :type => String
-  # belongs_to :identity
   has_many :xmains, :class_name => "Mindapp::Xmain"
 
   def has_role(role1)
