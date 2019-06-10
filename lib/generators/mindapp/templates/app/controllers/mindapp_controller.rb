@@ -380,20 +380,22 @@ class MindappController < ApplicationController
   def create_xmain(service)
     c = name2camel(service.module.code)
     custom_controller= "#{c}Controller"
+    safe_params = params.permit([:s, :action, :controller])
+    xvars =  {
+      :service_id=>service.id.to_s, :p=>safe_params.to_h,
+      :id=>params[:id],
+      :user_id=>current_user.try(:id),
+      :custom_controller=>custom_controller,
+      :host=>request.host,
+      :referer=>request.env['HTTP_REFERER']
+    }
     Mindapp::Xmain.create :service=>service,
       :start=>Time.now,
       :name=>service.name,
       :ip=> get_ip,
       :status=>'I', # init
       :user=>current_user,
-      :xvars=> {
-        :service_id=>service.id, :p=>params,
-        :id=>params[:id],
-        :user_id=>current_user.try(:id),
-        :custom_controller=>custom_controller,
-        :host=>request.host,
-        :referer=>request.env['HTTP_REFERER']
-      }
+      :xvars=> xvars
   end
   def create_runseq(xmain)
     @xvars= xmain.xvars
